@@ -1,35 +1,60 @@
 FORMAT: 1A
-HOST: http://agenda12.apiblueprint.org/
 
 # Agenda
 
-Agenda is a simple API allowing consumers to schedule meeting on-line
+Agenda is a simple API allowing consumers to schedule meeting online.
 
 # Group User
 
 Resource operations related to a user in the API.
 
-## User-Key [/v1/user/getkey{?username,password}]
+## User-Key [/v1/key]
+
+### Get user key [GET /v1/key{?username,password}]
+
+Get a security key for operations.
 
 + Parameters
     - username : `root` (string, required) - User Name
     - password : `pass` (required)
 
-### Get User Key [GET]
-
-get a security key for operations later
-
 + Response 200 (application/json)
 
         {
             "key":"1e3576bt"
-            "permissions":["user","admin"]
+        }
+        
+### Create a New User [POST]
+
++ Request (application/json)
+
+        {
+            "username":"zhang3",
+            "password":"zhang",
+            "email":"zhang3@mail2.sysu.edu.cn"
+            "phone":"12233344445"
         }
 
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /users/1
+
+    + Body
+
+            {
+                "id":1,
+                "key":"1e3576bt",
+                "username":"zhang3",
+                "password":"zhang",
+                "email":"zhang3@mail2.sysu.edu.cn",
+                "phone":"12233344445"
+            }
 
 # Group Users
 
-Resources related to a users in the API.
+Resources related to users in the API.
 
 ## Users Collection [/v1/users{?key}]
 
@@ -42,55 +67,83 @@ Resources related to a users in the API.
 
         [
             {
-                "id":1
-                "username":"zhang3"
-                "password":"zhang"
-                "email":"zhang3@mail2.sysu.edu.cn"
-            },{
-                "id":2
-                "username":"li4"
-                "password":"li"
-                "email":"li4@mail2.sysu.edu.cn"
+                "id":1,
+                "username":"zhang3",
+                "password":"zhang",
+                "email":"zhang3@mail2.sysu.edu.cn",
+                "phone":"12233334444"
+            }, {
+                "id":2,
+                "username":"li4",
+                "password":"li",
+                "email":"li4@mail2.sysu.edu.cn",
+                "phone":"12233334445"
             }
         ]
 
-### Create a New User [POST]
+### Delete current user [DELETE]
+    
++ Response 204
+
+# Group Meetings
+
+Resources related to users in the API.
+
+## Meetings Collection [/v1/meetings/{?key}]
+
++ Parameters
+    - key : `1e3576bt` (string, required)
+
+### List all meetings [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id":1,
+                "title":"zhang3",
+                "host":"zhang3",
+                "members":["li4"],
+                "starttime":"2006/01/02/15:04",
+                "endtime":"2006/01/02/15:05"
+            },{
+                "id":2,
+                "title":"li4",
+                "host":"li4",
+                "members":["zhang3"],
+                "starttime":"2006/01/03/15:04",
+                "endtime":"2006/01/03/15:05"
+            }
+        ]
+
+### Create a meeting [POST]
 
 + Request (application/json)
 
         {
-            "username":"zhang3"
-            "password":"zhang"
-            "email":"zhang3@mail2.sysu.edu.cn"
+            "title":"wang5",
+            "members":["zhang3","li4"],
+            "starttime":"2016/01/02/15:04",
+            "endtime":"2016/01/02/15:05"
         }
 
 + Response 201 (application/json)
 
     + Headers
 
-            Location: /users/1
+            Location: /meetings/1
 
     + Body
 
             {
-                "id": 1
-                "username":"zhang3"
-                "password":"zhang"
-                "email":"zhang3@mail2.sysu.edu.cn"
+                "id": 1,
+                "title":"wang5",
+                "host":"wang5",
+                "members":["zhang3","li4"],
+                "starttime":"2016/01/02/15:04",
+                "endtime":"2016/01/02/15:05"
             }
 
-### Get User by ID [GET /v1/users/{id}]
+### Clear all meeting the user hosts [DELETE]
 
-+ Parameters
-    - id : `1` (int, required) - User Name
-
-+ Response 200 (application/json)
-
-        {
-            "id" : 1
-            "username":"zhang3"
-            "password":"zhang"
-            "email":"zhang3@mail2.sysu.edu.cn"
-        }
-
-# Group Meetings
++ Response 204
