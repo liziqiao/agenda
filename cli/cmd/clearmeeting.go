@@ -33,7 +33,7 @@ var clearmeetingCmd = &cobra.Command{
 			return
 		}
 		req, err := http.NewRequest(http.MethodDelete,
-			host+"/v1/meetings/?key="+key, nil)
+			host+"/v1/meetings?key="+key, nil)
 		panicErr(err)
 		client := &http.Client{}
 		res, err := client.Do(req)

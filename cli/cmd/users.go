@@ -42,7 +42,7 @@ var usersCmd = &cobra.Command{
 		var data []map[string]interface{}
 		err = json.Unmarshal(body, &data)
 		panicErr(err)
-		fmt.Println(data)
+		fmt.Println(string(body))
 	},
 }
 

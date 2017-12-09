@@ -15,7 +15,6 @@
 package cmd
 
 import (
-	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -34,15 +33,12 @@ var meetingsCmd = &cobra.Command{
 			fmt.Println("Please login first.")
 			return
 		}
-		res, err := http.Get(host + "/v1/meetings/?key=" + key)
+		res, err := http.Get(host + "/v1/meetings?key=" + key)
 		panicErr(err)
 		defer res.Body.Close()
 		body, err := ioutil.ReadAll(res.Body)
 		panicErr(err)
-		var data []map[string]interface{}
-		err = json.Unmarshal(body, &data)
-		panicErr(err)
-		fmt.Println(data)
+		fmt.Println(string(body))
 	},
 }
 

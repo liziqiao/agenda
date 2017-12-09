@@ -9,12 +9,12 @@ package entities
 // Starttime - The start time of the meeting, in form YYYY/MM/DD/HH:MM
 // Endtime - The end time of the meeting, in form YYYY/MM/DD/HH:MM
 type Meeting struct {
-	ID        int
-	Title     string
-	Host      string
-	Members   []string
-	Starttime string
-	Endtime   string
+	ID        int      `json:"id"`
+	Title     string   `json:"title"`
+	Host      string   `json:"host"`
+	Members   []string `json:"members"`
+	Starttime string   `json:"starttime"`
+	Endtime   string   `json:"endtime"`
 }
 
 // NewMeeting returns a new instance of a meeting

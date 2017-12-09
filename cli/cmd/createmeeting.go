@@ -51,7 +51,7 @@ Please type in the information correctly.`,
 		}{title, members, starttime, endtime}
 		buf, err := json.Marshal(data)
 		panicErr(err)
-		res, err := http.Post(host+"/v1/meetings/?key="+key,
+		res, err := http.Post(host+"/v1/meetings?key="+key,
 			"application/json", bytes.NewBuffer(buf))
 		panicErr(err)
 		defer res.Body.Close()

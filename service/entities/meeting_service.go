@@ -11,9 +11,7 @@ var MeetingService = MeetingServiceProvider{}
 func (*MeetingServiceProvider) Insert(m *Meeting) error {
 	dao := meetingDAO{db}
 	err := dao.Insert(m)
-	if err != nil {
-		return err
-	}
+	panicIfErr(err)
 	return nil
 }
 
@@ -21,10 +19,16 @@ func (*MeetingServiceProvider) Insert(m *Meeting) error {
 func (*MeetingServiceProvider) FindAll() ([]Meeting, error) {
 	dao := meetingDAO{db}
 	meetings, err := dao.FindAll()
-	if err != nil {
-		return nil, err
-	}
+	panicIfErr(err)
 	return meetings, nil
+}
+
+// FindBy returns the first meeting whose value of col is val
+func (*MeetingServiceProvider) FindBy(col string, val string) (Meeting, error) {
+	dao := meetingDAO{db}
+	meeting, err := dao.FindBy(col, val)
+	panicIfErr(err)
+	return meeting, nil
 }
 
 // DeleteMeetingsHostedByUser deletes all meetings hosted by
@@ -32,8 +36,6 @@ func (*MeetingServiceProvider) FindAll() ([]Meeting, error) {
 func (*MeetingServiceProvider) DeleteMeetingsHostedByUser(username string) error {
 	dao := meetingDAO{db}
 	err := dao.DeleteMeetingsHostedByUser(username)
-	if err != nil {
-		return err
-	}
+	panicIfErr(err)
 	return nil
 }

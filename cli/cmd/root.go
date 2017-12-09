@@ -25,8 +25,8 @@ import (
 )
 
 const (
-	// host string = "http://localhost"
-	host    string = "http://localhost:8080"
+	host string = "https://private-cac6f-agenda15.apiary-mock.com"
+	// host    string = "http://localhost:8080"
 	keyPath string = "./.key"
 )
 

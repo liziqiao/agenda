@@ -7,21 +7,11 @@ type UserServiceProvider struct{}
 // UserService is an instance of UserServiceProvider
 var UserService = UserServiceProvider{}
 
-// Insert is an atomic operation that inserts a new
-// user to the database
+// Insert inserts a new user to the database
 func (*UserServiceProvider) Insert(u *User) error {
-	tx, err := db.Begin()
-	if err != nil {
-		panic(err)
-	}
-
-	dao := userDAO{tx}
-	err = dao.Insert(u)
-	if err != nil {
-		tx.Rollback()
-		panic(err)
-	}
-	tx.Commit()
+	dao := userDAO{db}
+	err := dao.Insert(u)
+	panicIfErr(err)
 	return nil
 }
 

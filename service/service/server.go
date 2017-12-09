@@ -1,6 +1,9 @@
 package service
 
 import (
+	"net/http"
+
+	"github.com/HinanawiTenshi/agenda/service/entities"
 	"github.com/gorilla/mux"
 	"github.com/unrolled/render"
 	"github.com/urfave/negroni"
@@ -53,4 +56,15 @@ func panicIfErr(err error) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func getKeyFromRequest(req *http.Request) string {
+	req.ParseForm()
+	return req.FormValue("key")
+}
+
+func verifyKey(key string) bool {
+	user, err := entities.UserService.FindBy("key", key)
+	panicIfErr(err)
+	return user != (entities.User{})
 }

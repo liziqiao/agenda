@@ -31,7 +31,7 @@ func (dao *userDAO) Insert(u *User) error {
 }
 
 func (dao *userDAO) FindAll() ([]User, error) {
-	sqlStmt := `SELECT * FROM users"`
+	sqlStmt := `SELECT * FROM users`
 
 	rows, err := dao.Query(sqlStmt)
 	if err != nil {
@@ -57,6 +57,7 @@ func (dao *userDAO) FindBy(col string, val string) (User, error) {
 	sqlStmt := `SELECT * FROM users WHERE ` + col + ` = '` + val + `';`
 
 	rows, err := dao.Query(sqlStmt)
+	defer rows.Close()
 	panicIfErr(err)
 	u := User{}
 	if rows.Next() {
