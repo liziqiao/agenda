@@ -61,7 +61,7 @@ var registerCmd = &cobra.Command{
 			err = json.Unmarshal(body, &data)
 			panicErr(err)
 
-			fmt.Printf("Register successfully. You are logged in as\n%v\n", data)
+			fmt.Printf("Register successfully. You are logged in as\n%v\n", string(body))
 
 			// Write the api key to file
 			keyFile, err := os.OpenFile(keyPath,
