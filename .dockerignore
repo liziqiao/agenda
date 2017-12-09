@@ -1,0 +1,5 @@
+.travis.yml
+apiary.apib
+.git
+cli/.key
+service/database.db
