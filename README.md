@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/HinanawiTenshi/agenda.svg?branch=master)](https://travis-ci.org/HinanawiTenshi/agenda)
+
 # Agenda
 
 A microservice powered by Apiary, containing a local cli program and a server. APIs designed on Apiary, see [Apiary Documentation] for details.
