@@ -15,13 +15,13 @@ Resource operations related to a user in the API.
 Get a security key for operations.
 
 + Parameters
-    - username : `root` (string, required) - User Name
-    - password : `pass` (required)
+    - username : `alice` (string, required) - User Name
+    - password : `iloveu` (required) - Password
 
 + Response 200 (application/json)
 
         {
-            "key":"1e3576bt"
+            "key":"6384e2b2184bcbf58eccf10ca7a6563c"
         }
         
 ### Create a New User [POST]
@@ -29,27 +29,23 @@ Get a security key for operations.
 + Request (application/json)
 
         {
-            "username":"zhang3",
-            "password":"zhang",
-            "email":"zhang3@mail2.sysu.edu.cn"
-            "phone":"12233344445"
+            "username":"bob",
+            "password":"iloveu2",
+            "email":"bob@gmail.com"
+            "phone":"12345678901"
         }
 
 + Response 201 (application/json)
-
-    + Headers
-
-            Location: /users/1
 
     + Body
 
             {
                 "id":1,
-                "key":"1e3576bt",
-                "username":"zhang3",
-                "password":"zhang",
-                "email":"zhang3@mail2.sysu.edu.cn",
-                "phone":"12233344445"
+                "key":"9f9d51bc70ef21ca5c14f307980a29d8",
+                "username":"bob",
+                "password":"iloveu2",
+                "email":"bob@gmail.com",
+                "phone":"12345678901"
             }
 
 # Group Users
@@ -59,7 +55,7 @@ Resources related to users in the API.
 ## Users Collection [/v1/users{?key}]
 
 + Parameters
-    - key : `1e3576bt` (string, required)
+    - key : `6384e2b2184bcbf58eccf10ca7a6563c` (string, required)
 
 ### List all Users [GET]
 
@@ -68,16 +64,18 @@ Resources related to users in the API.
         [
             {
                 "id":1,
-                "username":"zhang3",
-                "password":"zhang",
-                "email":"zhang3@mail2.sysu.edu.cn",
-                "phone":"12233334444"
+                "key": "******",
+                "username":"alice",
+                "password":"******",
+                "email":"alice@gmail.com",
+                "phone":"10987654321"
             }, {
                 "id":2,
-                "username":"li4",
-                "password":"li",
-                "email":"li4@mail2.sysu.edu.cn",
-                "phone":"12233334445"
+                "key": "******",
+                "username":"bob",
+                "password":"******",
+                "email":"bob@gmail.com",
+                "phone":"12345678901"
             }
         ]
 
@@ -92,7 +90,7 @@ Resources related to users in the API.
 ## Meetings Collection [/v1/meetings{?key}]
 
 + Parameters
-    - key : `1e3576bt` (string, required)
+    - key : `6384e2b2184bcbf58eccf10ca7a6563c` (string, required)
 
 ### List all meetings [GET]
 
@@ -101,18 +99,18 @@ Resources related to users in the API.
         [
             {
                 "id":1,
-                "title":"zhang3",
-                "host":"zhang3",
-                "members":["li4"],
-                "starttime":"2006/01/02/15:04",
-                "endtime":"2006/01/02/15:05"
+                "title":"AMeeting",
+                "host":"alice",
+                "members":["bob"],
+                "starttime":"2017/12/25/13:00",
+                "endtime":"2017/12/25/17:00"
             },{
                 "id":2,
-                "title":"li4",
-                "host":"li4",
-                "members":["zhang3"],
-                "starttime":"2006/01/03/15:04",
-                "endtime":"2006/01/03/15:05"
+                "title":"BMeeting",
+                "host":"bob",
+                "members":["alice", "tracy"],
+                "starttime":"2017/12/26/13:00",
+                "endtime":"2017/12/26/17:05"
             }
         ]
 
@@ -121,27 +119,23 @@ Resources related to users in the API.
 + Request (application/json)
 
         {
-            "title":"wang5",
-            "members":["zhang3","li4"],
-            "starttime":"2016/01/02/15:04",
-            "endtime":"2016/01/02/15:05"
+            "title":"Meeting4Bob",
+            "members":["bob"],
+            "starttime":"2017/12/25/23:00",
+            "endtime":"2017/12/26/05:00"
         }
 
 + Response 201 (application/json)
 
-    + Headers
-
-            Location: /meetings/1
-
     + Body
 
             {
-                "id": 1,
-                "title":"wang5",
-                "host":"wang5",
-                "members":["zhang3","li4"],
-                "starttime":"2016/01/02/15:04",
-                "endtime":"2016/01/02/15:05"
+                "id": 3,
+                "title":"Meeting4Bob",
+                "host":"alice",
+                "members":["bob"],
+                "starttime":"2017/12/25/23:00",
+                "endtime":"2017/12/26/05:00"
             }
 
 ### Clear all meeting the user hosts [DELETE]
