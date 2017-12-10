@@ -92,6 +92,6 @@ func init() {
 		"", "Your password")
 	registerCmd.Flags().StringP("email", "e",
 		"", "Your email address")
-	registerCmd.Flags().StringP("phone", "h",
+	registerCmd.Flags().StringP("phone", "o",
 		"", "Your phone number")
 }
